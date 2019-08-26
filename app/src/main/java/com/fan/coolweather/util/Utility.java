@@ -1,16 +1,33 @@
 package com.fan.coolweather.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.fan.coolweather.db.City;
 import com.fan.coolweather.db.County;
 import com.fan.coolweather.db.Province;
+import com.fan.coolweather.gson.Weather;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Utility {
+
+    public static Weather handleWeatherResponse(String response) {
+        try {
+            Log.d("handleWeatherResponse->", response);
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+
+            return new Gson().fromJson(weatherContent, Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * 解析和处理服务器返回的省级数据
