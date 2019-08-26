@@ -2,7 +2,7 @@ package com.fan.coolweather.gson;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Suggesstion {
+public class Suggestion {
 
     @SerializedName("comf")
     public Comfort comfort;
